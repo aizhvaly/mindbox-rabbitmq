@@ -6,7 +6,7 @@
 - Для изоляции процессов используется отдельный namespace.
 - В качестве механизма peer discovery был выбрал один из плагинов [https://github.com/rabbitmq/rabbitmq-peer-discovery-k8s](https://github.com/rabbitmq/rabbitmq-peer-discovery-k8s) для автоматизации процесса поиска пиров. Конфигурация содержится в файле **configmap-rmq.yaml**.
 
-    **cluster_formation.k8s.address_type. З**аменил с дефолтного **ip** на **hostname,** т.к. при рестарте подов ip будут меняться и кластер развалится, в отличии от hostname. StatefulSet гарантирует нам постоянное имя хоста на время жизни всего StatefulSet.
+    **cluster_formation.k8s.address_type. З**аменил с дефолтного **ip** на **hostname,** т.к. при рестарте подов ip будут меняться, и кластер развалится, в отличии от hostname. StatefulSet гарантирует нам постоянное имя хоста на время жизни всего StatefulSet.
 
     **cluster_partition_handling.** При потери кворума был выбран механизм **pause_minority,** т.к. нельзя отрицать того, что мы можем потерять часть нод, тем более, если они распределены между стойками и подключены к разным tor или установлены в разных ДЦ. [https://www.rabbitmq.com/partitions.html#automatic-handling](https://www.rabbitmq.com/partitions.html#automatic-handling)
 
